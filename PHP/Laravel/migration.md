@@ -98,3 +98,100 @@ Database:Migration
     `$table->unsignedSmallInteger('votes');`  |  UNSIGNED SMALLINT 컬럼.
     `$table->unsignedTinyInteger('votes');`  |  UNSIGNED TINYINT 컬럼.
     `$table->uuid('id');`  |  UUID 컬럼.
+
+- 컬럼 Modifiers
+    ```php
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('email')->nullable();
+        });
+    ```
+    Modifier  | 설명
+    --------  |  -----------
+    `->after('column')`  |  컬럼을 다른 컬럼 "뒤"로 옮기세요 (MySQL)
+    `->autoIncrement()`  |  INTEGER 컬럼을 자동으로 증가하는 (auto-increment) (primary key)로 지정
+    `->charset('utf8')`  |  컬럼의 캐릭터셋을 지정 (MySQL)
+    `->collation('utf8_unicode_ci')`  |  컬럼의 collation 지정 (MySQL/SQL Server)
+    `->comment('my comment')`  |  컬럼에 코멘트 추가 (MySQL)
+    `->default($value)`  |  컬럼의 "기본"값을 설정합니다
+    `->first()`  |  테이블에 컬럼을 "맨 처음" 위치로 옮기세요 (MySQL)
+    `->nullable($value = true)`  |  NULL 값이 컬럼에 입력되는 것을 허용합니다(기본값)
+    `->storedAs($expression)`  |  Create a stored generated column (MySQL)
+    `->unsigned()`  |  INTEGER 컬럼을 UNSIGNED 으로 지정 (MySQL)
+    `->virtualAs($expression)`  |  Create a virtual generated column (MySQL)
+
+ - 컬럼 수정
+    - doctrine/dbal 추가
+        - 컬럼의 현재 상태 확인 및 컬럼 변경
+    ```php
+    Schema::table('users', function (Blueprint $table) {
+        $table->string('name', 50)->change();
+    });
+    ```
+    ```php
+    Schema::table('users', function (Blueprint $table) {
+        $table->string('name', 50)->nullable()->change();
+    });
+    ```
+    ```php
+    Schema::table('users', function (Blueprint $table) {
+        $table->renameColumn('from', 'to');
+    });
+    ```
+    - 삭제
+    ```php
+    Schema::table('users', function (Blueprint $table) {
+        $table->dropColumn('votes');
+    });
+    ```
+    ```php
+    Schema::table('users', function (Blueprint $table) {
+        $table->dropColumn(['votes', 'avatar', 'location']);
+    });
+    ```
+    
+    - 인덱스
+    ```php
+    $table->string('email')->unique();
+    $table->unique('email');
+    $table->index(['account_id', 'created_at']);
+    $table->unique('email', 'unique_email');
+    ```
+    커맨드  | 설명
+    -------  |  -----------
+    `$table->primary('id');`  |  primary key 추가.
+    `$table->primary(['id', 'parent_id']);`  |   복합 키 추가.
+    `$table->unique('email');`  |  유니크 인덱스 추가.
+    `$table->index('state');`  |  기본적인 인덱스 추가.
+    `$table->spatialIndex('location');`  |  공간(spatial) 인덱스 추가 (SQLite 제외.)
+    
+    명령어  | 설명
+    ------------- | -------------
+    `$table->dropPrimary('users_id_primary');`  |  "users" 테이블에서 프라이머리 키 지우기.
+    `$table->dropUnique('users_email_unique');`  |  "users" 테이블에서 유니크 인덱스 지우기.
+    `$table->dropIndex('geo_state_index');`  |  "geo" 테이블에서 기본적인 인덱스 지우기.
+    `$table->dropSpatialIndex('geo_location_spatialindex');`  |  "geo" 테이블에서 공간(spatial) 인덱스 지우기(SQLite 제외).
+    
+    ```php
+    Schema::table('geo', function (Blueprint $table) {
+        $table->dropIndex(['state']); // Drops index 'geo_state_index'
+    });
+    ```
+    
+- 외래키 제한
+    ```php
+    Schema::table('posts', function (Blueprint $table) {
+        $table->integer('user_id')->unsigned();
+    
+        $table->foreign('user_id')->references('id')->on('users');
+    });
+  
+    $table->foreign('user_id')
+          ->references('id')->on('users')
+          ->onDelete('cascade');
+        
+    $table->dropForeign('posts_user_id_foreign');
+    $table->dropForeign(['user_id']);
+  
+    Schema::enableForeignKeyConstraints();
+    Schema::disableForeignKeyConstraints();
+    ```
