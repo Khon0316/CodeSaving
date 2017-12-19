@@ -82,20 +82,12 @@ skip(10)->take(5)
  ```
  
  ```
-
- DEBUG (100): Detailed debug information.
- 
- INFO (200): Interesting events. Examples: User logs in, SQL logs.
- 
- NOTICE (250): Normal but significant events.
- 
- WARNING (300): Exceptional occurrences that are not errors. Examples: Use of deprecated APIs, poor use of an API, undesirable things that are not necessarily wrong.
- 
- ERROR (400): Runtime errors that do not require immediate action but should typically be logged and monitored.
- 
- CRITICAL (500): Critical conditions. Example: Application component unavailable, unexpected exception.
- 
- ALERT (550): Action must be taken immediately. Example: Entire website down, database unavailable, etc. This should trigger the SMS alerts and wake you up.
- 
- EMERGENCY (600): Emergency: system is unusable.
+DEBUG (100) : 자세한 디버그 정보.
+정보 (200) : 흥미로운 사건. 예 : 사용자 로그인, SQL 로그.
+주의 사항 (250) : 정상이지만 중요한 사건.
+경고 (300) : 오류가 아닌 예외 발생. 예 : 사용되지 않는 API의 사용, API의 사용 빈도, 바람직하지 않은 것들이 반드시 잘못된 것은 아닙니다.
+ERROR (400) : 즉각적인 조치가 필요하지 않지만 일반적으로 기록되고 모니터링되어야하는 런타임 오류.
+위험 (500) : 중대한 조건. 예 : 응용 프로그램 구성 요소를 사용할 수 없으며 예기치 않은 예외입니다.
+ALERT (550) : 즉시 조치를 취해야합니다. 예 : 전체 웹 사이트 다운, 데이터베이스 사용 불가 등. SMS 알림이 울리고 깨어나야합니다.
+응급 (600) : 응급 : 시스템을 사용할 수 없습니다.
  ```
