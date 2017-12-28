@@ -10,3 +10,7 @@ game
 DB 설계
 -
 http://aquerytool.com/
+
+VPS
+-
+https://www.iwinv.kr/
