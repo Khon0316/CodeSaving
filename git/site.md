@@ -22,3 +22,7 @@ https://github.com/php-ai/php-ml
 Program O AI Chatbot
 -
 https://program-o.com/v2/download
+
+한글 오픈데이터
+-
+http://openhangul.com/
