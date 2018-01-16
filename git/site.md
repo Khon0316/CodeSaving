@@ -29,3 +29,6 @@ http://openhangul.com/
 
 NativeScript 
 - https://www.nativescript.org/
+
+pythonista for IOS
+- http://omz-software.com/pythonista/
