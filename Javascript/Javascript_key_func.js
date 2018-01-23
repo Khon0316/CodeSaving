@@ -27,3 +27,6 @@ function removeChar(event) {
         event.target.value = event.target.value.replace(/[^0-9]/g, "");
     }
 }
+
+/* 해당 달의 마지막 일수 구하기 */
+$last_day = 32 - (new Date($('#year').val(), ($('#month').val() - 1), 32).getDate());
