@@ -30,3 +30,12 @@ function removeChar(event) {
 
 /* 해당 달의 마지막 일수 구하기 */
 $last_day = 32 - (new Date($('#year').val(), ($('#month').val() - 1), 32).getDate());
+
+/* input 엔터 방지 */
+document.onkeypress = function (evt) {
+    var evt = (evt) ? evt : ((event) ? event : null);
+    var node = (evt.target) ? evt.target : ((evt.srcElement) ? evt.srcElement : null);
+    if ((evt.keyCode == 13) && (node.type=="text"))  {
+        return false;
+    }
+};
